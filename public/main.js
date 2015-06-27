@@ -1,6 +1,6 @@
 var module = angular.module('todoApp', []);
 
-module.controller('mainController', function($scope, $http) {
+module.controller('mainController', function($scope, $http, todoService) {
 
   $http.get('/api/todos').success(function(data) {
     $scope.todos = data;
@@ -21,7 +21,7 @@ module.controller('mainController', function($scope, $http) {
   };
 
   $scope.deleteTodo = function(id) {
-    $http.delete('api/todos/' + id)
+    todoService.deleteTodo(id);
       .success(function(data) {
         $scope.todos = data;
       })
@@ -31,17 +31,9 @@ module.controller('mainController', function($scope, $http) {
   }
 });
 
-//module.factory('mySampleFactory', function() {
-//  var factoryObj = {};
-//
-//  factoryObj.factoryData = [1,2,3,4,5];
-//  factoryObj.alertMessage = function() {
-//   alert('HEY');
-//  };
-//
-//  return factoryObj;
-//});
-//
-//module.service('mySampleService', function() {
-//  this.serviceData = [6,7,8,9];
-//});
+module.factory('todoService', function($http) {
+  var factoryObj = {};
+
+  factoryObj.deleteTodo = $http.delete('api/todos/' + id);
+  return factoryObj;
+});
