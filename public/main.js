@@ -21,7 +21,7 @@ module.controller('mainController', function($scope, $http, todoService) {
   };
 
   $scope.deleteTodo = function(id) {
-    todoService.deleteTodo(id);
+    todoService.deleteTodo(id)
       .success(function(data) {
         $scope.todos = data;
       })
@@ -34,6 +34,9 @@ module.controller('mainController', function($scope, $http, todoService) {
 module.factory('todoService', function($http) {
   var factoryObj = {};
 
-  factoryObj.deleteTodo = $http.delete('api/todos/' + id);
+  factoryObj.deleteTodo = function(id) {
+    return $http.delete('/api/todos/' + id);
+  }
+
   return factoryObj;
 });
