@@ -1,7 +1,8 @@
 var module = angular.module('todoApp', []);
 
-module.controller('mainController', function($scope) {
-  $http.get('/api/todo'.success(function(data) {
+module.controller('mainController', function($scope, $http) {
+
+  $http.get('/api/todos').success(function(data) {
     $scope.todos = data;
   }).error(function(error) {
     console.log(error);
