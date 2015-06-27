@@ -19,6 +19,16 @@ module.controller('mainController', function($scope, $http) {
         console.log(error);
     });
   };
+
+  $scope.deleteTodo = function(id) {
+    $http.delete('api/todos/' + id)
+      .success(function(data) {
+        $scope.todos = data;
+      })
+      .error(function(error) {
+        console.log(error);
+            });
+  }
 });
 
 //module.factory('mySampleFactory', function() {
