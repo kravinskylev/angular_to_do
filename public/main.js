@@ -7,6 +7,18 @@ module.controller('mainController', function($scope, $http) {
   }).error(function(error) {
     console.log(error);
   });
+
+  $scope.createTodo = function() {
+    $http.post('/api/todos', $scope.formData)
+      .success(function(data) {
+        $scope.formData = {};
+        $scope.todos = data;
+        console.log(data);
+      })
+        .error(function(error) {
+        console.log(error);
+    });
+  };
 });
 
 //module.factory('mySampleFactory', function() {
